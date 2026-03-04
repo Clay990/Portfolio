@@ -718,7 +718,7 @@
                 requestAnimationFrame(animate);
             }
 
-            window.addEventListener('resize', () => { resize(); });
+            window.addEventListener('resize', () => { resize(); }, { passive: true });
             document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
             document.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
 
