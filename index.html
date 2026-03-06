@@ -303,7 +303,107 @@
         .single-post-text blockquote {
             border-left-color: #4bffa5
         }
-    </style><noscript>
+    </style>
+    <style>
+        /* Portfolio update - new sections */
+        .section.about,
+        .section.skills,
+        .section.works {
+            padding: 70px 0;
+        }
+        .section .content-box {
+            padding: 0 100px;
+        }
+        .section .title {
+            margin-bottom: 40px;
+        }
+        .section.about .desc p,
+        .section.about .info-list ul li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        .section.about .info-list {
+            margin-bottom: 30px;
+        }
+        .skills.list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .skills.list ul li {
+            margin-bottom: 18px;
+        }
+        .skills.list ul li .name {
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .skills.list ul li .progress {
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            height: 6px;
+            width: 100%;
+        }
+        .skills.list ul li .progress .percentage {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .section.works .box-items .box-items-col {
+            display: inline-block;
+            width: 50%;
+            vertical-align: top;
+            padding: 0 20px 40px;
+        }
+        .section.works .box-items .box-item {
+            width: 100%;
+            padding: 0;
+            float: none;
+        }
+        .section.works .box-item .main {
+            min-height: 120px;
+            border-radius: 8px 8px 0 0;
+        }
+        .section.works .box-item .desc {
+            padding: 20px 0 10px;
+        }
+        .section.works .box-item .desc .category {
+            margin-bottom: 8px;
+        }
+        .section.works .box-item .desc p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #bbb;
+        }
+        .section.skills .service-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .section.skills .service-item {
+            flex: 1 1 200px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+        }
+        .section.skills .service-item .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .section.skills .service-item .name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .section .content-box {
+                padding: 0 20px;
+            }
+            .section.works .box-items .box-items-col {
+                width: 100%;
+            }
+        }
+    </style>
+    <noscript>
         <style>
             .woocommerce-product-gallery {
                 opacity: 1 !important
@@ -488,14 +588,14 @@
                                                                 data-bg="img/Firefly.png"
                                                                 style="">
                                                             </div>
-                                                            <h1 class="h-title"> <span {{{
-                                                                    view.getRenderAttributeString( 'title' ) }}}> Hello,
-                                                                    I’m <strong>Suraj Mondal</strong>, a passionate developer exploring React, Tailwind CSS, JavaScript.</span></h1>
+                                                            <h1 class="h-title"> <span> Hello,
+                                                                    I'm <strong>Suraj Mondal</strong>, a Full-Stack Mobile Developer &amp; BCA Student building real apps with AI, creativity, and curiosity.</span></h1>
                                                             <div class="h-subtitles">
                                                                 <div class="h-subtitle typing-subtitle">
-                                                                    <p>I code cool <strong>tools</strong></p>
-                                                                    <p>I develop <strong>websites</strong></p>
-                                                                    <p>I love <strong>tech</strong></p>
+                                                                    <p>I build <strong>mobile apps</strong></p>
+                                                                    <p>I ship <strong>hackathon projects</strong></p>
+                                                                    <p>I vibe-code with <strong>AI</strong></p>
+                                                                    <p>I craft <strong>Chrome extensions</strong></p>
                                                                 </div> <span class="typed-subtitle" data-tspeed="100"
                                                                     data-tdelay="500"></span>
                                                             </div>
@@ -510,6 +610,158 @@
                             </div>
                         </div>
                     </section>
+                <!-- About Section -->
+                <div class="section about">
+                    <div class="content-box">
+                        <div class="title">
+                            <div class="title_inner">About Me</div>
+                        </div>
+                        <div class="info-list">
+                            <ul>
+                                <li><strong>Name:</strong> Suraj Mondal</li>
+                                <li><strong>Role:</strong> BCA Student &bull; App Developer &bull; AI-Assisted Builder</li>
+                                <li><strong>University:</strong> MAKAUT</li>
+                                <li><strong>Email:</strong> asuraj991m@gmail.com</li>
+                            </ul>
+                        </div>
+                        <div class="desc">
+                            <p>Hi, I'm Suraj Mondal, a BCA student and developer who loves building real applications using modern technologies and AI.</p>
+                            <p>I enjoy turning ideas into working products. Instead of just writing code, I focus on solving problems and shipping complete apps. I actively participate in hackathons and have already published apps on the Play Store.</p>
+                            <p>I consider myself a &ldquo;vibe coder&rdquo; &mdash; someone who combines creativity, logic, and powerful AI tools to build complex applications quickly. I regularly work with advanced AI models like Claude and Gemini to design, plan, and develop software.</p>
+                            <p>My long-term dream is to build immersive digital worlds similar to the VR universe from <em>Sword Art Online</em>, where people can interact, work, and live inside virtual environments.</p>
+                            <p>Currently focused on: building useful mobile apps, participating in hackathons, exploring AI-assisted development, and learning advanced software development concepts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills / Tech Stack Section -->
+                <div class="section skills">
+                    <div class="content-box">
+                        <div class="title">
+                            <div class="title_inner">Tech Stack</div>
+                        </div>
+                        <div class="skills list">
+                            <ul>
+                                <li>
+                                    <div class="name">React Native</div>
+                                    <div class="progress"><div class="percentage" style="width:90%" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                </li>
+                                <li>
+                                    <div class="name">Python</div>
+                                    <div class="progress"><div class="percentage" style="width:75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                </li>
+                                <li>
+                                    <div class="name">JavaScript / Web APIs</div>
+                                    <div class="progress"><div class="percentage" style="width:80%" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                </li>
+                                <li>
+                                    <div class="name">Appwrite &amp; Firebase (BaaS)</div>
+                                    <div class="progress"><div class="percentage" style="width:70%" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                </li>
+                                <li>
+                                    <div class="name">Git &amp; AI-Assisted Development</div>
+                                    <div class="progress"><div class="percentage" style="width:85%" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-items" style="margin-top:2rem;">
+                            <div class="service-item">
+                                <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                                <div class="name">Cross-Platform Mobile Apps</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="icon"><i class="fas fa-puzzle-piece"></i></div>
+                                <div class="name">Chrome Extensions</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="icon"><i class="fas fa-robot"></i></div>
+                                <div class="name">Automation Scripts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="section works">
+                    <div class="content-box">
+                        <div class="title">
+                            <div class="title_inner">Key Projects</div>
+                        </div>
+                        <div class="box-items">
+                            <div class="box-items-col">
+                                <div class="box-item">
+                                    <div class="image">
+                                        <div class="main" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                                            <i class="fas fa-train" style="font-size:3rem;color:#4bffa5;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <span class="name">Metro Bondhu</span>
+                                        <div class="category">React Native</div>
+                                        <p>A comprehensive guide for the Kolkata Metro, helping commuters navigate the city's transit system.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-items-col">
+                                <div class="box-item">
+                                    <div class="image">
+                                        <div class="main" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                                            <i class="fas fa-plane" style="font-size:3rem;color:#4bffa5;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <span class="name">Nomvia</span>
+                                        <div class="category">React Native &bull; Appwrite</div>
+                                        <p>A travel-focused app built for the #Shipyard2026 hackathon.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-items-col">
+                                <div class="box-item">
+                                    <div class="image">
+                                        <div class="main" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                                            <i class="fas fa-paint-roller" style="font-size:3rem;color:#4bffa5;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <span class="name">MangoPaint</span>
+                                        <div class="category">AI Integration &bull; Mobile</div>
+                                        <p>An AI-powered home visualizer designed for local painters in India to preview colors for clients.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-items-col">
+                                <div class="box-item">
+                                    <div class="image">
+                                        <div class="main" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                                            <i class="fas fa-users" style="font-size:3rem;color:#4bffa5;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <span class="name">Quad</span>
+                                        <div class="category">React Native</div>
+                                        <p>A dedicated campus communication platform designed to streamline student interactions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-items-col">
+                                <div class="box-item">
+                                    <div class="image">
+                                        <div class="main" style="background:#1a1a2e;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                                            <i class="fab fa-chrome" style="font-size:3rem;color:#4bffa5;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <span class="name">Auto-Publicist Pro</span>
+                                        <div class="category">JavaScript &bull; Web APIs</div>
+                                        <p>A Chrome extension that automates social media content creation based on browsing history.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 </div>
             </div><!-- #post-510 -->
         </div> <!-- Footer -->
