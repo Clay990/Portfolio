@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Mondal | VHS Log</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VCR+OSD+Mono&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0000ff;
+            color: #fff;
+            font-family: 'VCR OSD Mono', monospace; /* Use a VCR-like font */
+            overflow-x: hidden;
+            text-transform: uppercase;
+        }
+
+        /* VHS Effects Container */
+        .vhs-container {
+            min-height: 100vh;
+            padding: 5vh 5vw;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Static/Noise overlay */
+        .vhs-container::before {
+            content: " ";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.15;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Tracking line animation */
+        .tracking-line {
+            position: fixed;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            z-index: 11;
+            pointer-events: none;
+            opacity: 0;
+            animation: tracking 8s infinite linear;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,0,0,0.4);
+        }
+
+        @keyframes tracking {
+            0% { top: -10px; opacity: 0; }
+            10% { opacity: 1; filter: url(#glitch); } /* Apply SVG filter briefly */
+            15% { filter: none; }
+            90% { top: 100vh; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* HUD UI */
+        .hud {
+            position: fixed;
+            top: 20px; left: 20px; right: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 2rem;
+            z-index: 5;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .hud-play { color: #0f0; animation: blink 1s infinite; }
+        .hud-time { color: #fff; }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Content */
+        .content {
+            max-width: 800px;
+            margin: 100px auto 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin: 0 0 20px 0;
+            text-shadow: 3px 0px 0px rgba(255,0,0,0.8), -3px 0px 0px rgba(0,255,255,0.8);
+            animation: textGlitch 3s infinite alternate;
+        }
+
+        @keyframes textGlitch {
+            0%, 90%, 100% { text-shadow: 3px 0 0 rgba(255,0,0,0.8), -3px 0 0 rgba(0,255,255,0.8); transform: translate(0); }
+            92% { text-shadow: -5px 0 0 rgba(255,0,0,0.8), 5px 0 0 rgba(0,255,255,0.8); transform: translate(-2px, 2px); }
+            94% { text-shadow: 5px 0 0 rgba(255,0,0,0.8), -5px 0 0 rgba(0,255,255,0.8); transform: translate(2px, -2px); }
+            96% { text-shadow: 0 0 0 rgba(255,0,0,0.8), 0 0 0 rgba(0,255,255,0.8); transform: translate(0); }
+        }
+
+        .log-entry {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #fff;
+        }
+
+        p { font-size: 1.2rem; line-height: 1.6; }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        a {
+            display: block;
+            padding: 15px;
+            background: #fff;
+            color: #0000ff;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: 0.1s;
+        }
+
+        a:hover {
+            background: #ff00ff;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .hud { font-size: 1.2rem; }
+            .content { margin-top: 60px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="tracking-line"></div>
+    <div class="vhs-container">
+        <div class="hud">
+            <div class="hud-play">▶ PLAY</div>
+            <div class="hud-time" id="time">00:00:00</div>
+        </div>
+
+        <div class="content">
+            <h1>SURAJ_MONDAL</h1>
+            
+            <div class="log-entry">
+                <h2>> TAPE_01: ABOUT</h2>
+                <p>SUBJECT: FULL-STACK MOBILE DEVELOPER. BCA STUDENT AT MAKAUT. VIBE CODER. SPECIALIZES IN AI INTEGRATION AND RAPID PROTOTYPING. MISSION OBJECTIVE: BUILD IMMERSIVE DIGITAL WORLDS.</p>
+            </div>
+
+            <div class="log-entry">
+                <h2>> TAPE_02: LOADOUT</h2>
+                <p>REACT NATIVE // PYTHON // JAVASCRIPT // AI PROMPTING</p>
+            </div>
+
+            <div class="links">
+                <a href="https://works-mauve.vercel.app/">EJECT: WORKS</a>
+                <a href="https://claydev.site/">EJECT: LOGS</a>
+                <a href="https://github.com/Clay990/Projects">EJECT: CODE</a>
+                <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo">EJECT: RESUME</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SVG Filter for glitch effect on the tracking line -->
+    <svg style="width:0;height:0;position:absolute;">
+        <filter id="glitch">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <script>
+        // Update timer HUD
+        let seconds = 0;
+        setInterval(() => {
+            seconds++;
+            const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+            const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('time').innerText = `${h}:${m}:${s}`;
+        }, 1000);
+    </script>
+</body>
+</html>

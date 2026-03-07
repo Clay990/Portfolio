@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Mondal | Cyberpunk Dev</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-magenta: #ff00ea;
+            --dark-bg: #050505;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 2px 2px var(--neon-magenta), -2px -2px var(--neon-cyan);
+            animation: textFlicker 3s infinite alternate;
+        }
+
+        @keyframes textFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 2px 2px var(--neon-magenta), -2px -2px var(--neon-cyan); }
+            20%, 24%, 55% { text-shadow: none; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 2rem;
+            border-right: 2px solid var(--neon-cyan);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink 0.5s step-end infinite alternate;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { 50% { border-color: transparent } }
+
+        .box {
+            border: 2px solid var(--neon-cyan);
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3) inset;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta), var(--neon-cyan));
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 0, 234, 0.5) inset;
+            border-color: var(--neon-magenta);
+        }
+
+        .box:hover::before { opacity: 1; }
+
+        .links { display: flex; gap: 1rem; flex-wrap: wrap; }
+        
+        a.btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: var(--dark-bg);
+            background: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        a.btn:hover {
+            background: var(--neon-magenta);
+            box-shadow: 0 0 20px var(--neon-magenta);
+            color: #fff;
+        }
+
+        .skills {
+            display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;
+        }
+        .skill-tag {
+            border: 1px solid var(--neon-magenta);
+            padding: 5px 15px;
+            color: var(--neon-magenta);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,0,234,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255,0,234,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,0,234,0); }
+        }
+        * {
+            box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1rem; width: 100%; }
+            h1 { font-size: 2.5rem; white-space: normal; word-wrap: break-word; }
+            .subtitle { 
+                font-size: 1.2rem; 
+                white-space: normal; 
+                border-right: none; 
+                animation: none; 
+                overflow: visible; 
+                width: 100% !important; 
+            }
+            .box { padding: 1.5rem; width: 100%; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; text-align: center; }
+            .subtitle { font-size: 1rem; text-align: center; }
+            .glitch-wrapper { display: flex; justify-content: center; width: 100%; }
+            .links { flex-direction: column; width: 100%; }
+            a.btn { text-align: center; width: 100%; }
+            .skills { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glitch-wrapper">
+            <h1 data-text="SURAJ MONDAL">SURAJ MONDAL</h1>
+        </div>
+        <div class="subtitle">Full-Stack Mobile Dev & AI Vibe Coder_</div>
+        
+        <div class="box">
+            <h2>> SYSTEM.ABOUT</h2>
+            <p>BCA student at MAKAUT. Building real applications, shipping hackathon projects, and crafting Chrome extensions. My dream is to build immersive digital VR worlds like Sword Art Online.</p>
+        </div>
+
+        <div class="box">
+            <h2>> TECH_STACK</h2>
+            <div class="skills">
+                <span class="skill-tag">React Native [90%]</span>
+                <span class="skill-tag">Python [85%]</span>
+                <span class="skill-tag">JavaScript [80%]</span>
+                <span class="skill-tag">AI Prompting [95%]</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>> NEURAL_LINKS</h2>
+            <div class="links">
+                <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo" class="btn" target="_blank">Resume.exe</a>
+                <a href="https://works-mauve.vercel.app/" class="btn" target="_blank">Works.app</a>
+                <a href="https://claydev.site/" class="btn" target="_blank">Blogs.log</a>
+                <a href="https://github.com/Clay990/Projects" class="btn" target="_blank">GitHub.git</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

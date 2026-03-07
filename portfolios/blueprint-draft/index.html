@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj | Blueprint</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Montserrat:wght@400;700&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #0b2e59; /* Blueprint Blue */
+            /* Graph paper grid */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        .blueprint-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 4px solid #fff;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Dimension lines */
+        .blueprint-container::before {
+            content: 'PROJECT: S. MONDAL - PHASE 1';
+            position: absolute;
+            bottom: -35px; left: 0;
+            font-family: 'Architects Daughter', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .dim-line-h {
+            position: absolute; top: -20px; left: 0; width: 100%; height: 1px; background: #fff;
+        }
+        .dim-line-h::before, .dim-line-h::after { content: ''; position: absolute; top: -5px; width: 1px; height: 11px; background: #fff; }
+        .dim-line-h::before { left: 0; } .dim-line-h::after { right: 0; }
+        
+        .dim-text {
+            position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+            font-family: 'Architects Daughter', cursive; font-size: 1.2rem;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            border-bottom: 2px dashed #fff;
+            padding-bottom: 10px;
+        }
+
+        h2 { font-family: 'Architects Daughter', cursive; font-size: 2rem; margin-top: 0; color: #a1c6ff;}
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .spec-box {
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 20px;
+            position: relative;
+        }
+        .spec-box::after {
+            content: 'FIG ' counter(fig);
+            position: absolute; bottom: 5px; right: 10px;
+            font-family: 'Architects Daughter', cursive; opacity: 0.5;
+        }
+        body { counter-reset: fig; }
+        .spec-box { counter-increment: fig; }
+
+        p { font-size: 1.2rem; line-height: 1.6; }
+
+        ul { list-style-type: square; font-size: 1.2rem; padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        .links { display: flex; gap: 20px; flex-wrap: wrap; }
+        
+        a.btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.2s;
+            background: transparent;
+        }
+        a.btn:hover { background: #fff; color: #0b2e59; }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .blueprint-container { padding: 20px; }
+            h1 { font-size: 3rem; }
+            .specs-grid { grid-template-columns: 1fr; gap: 20px; }
+            .links { flex-direction: column; }
+            a.btn { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="blueprint-container">
+        <div class="dim-line-h"><div class="dim-text">100% SCALE</div></div>
+
+        <h1>Suraj Mondal</h1>
+        
+        <div class="specs-grid">
+            <div class="spec-box">
+                <h2>Design Objective</h2>
+                <p>Construct robust full-stack mobile applications utilizing modern frameworks. Integrate AI logic layers for rapid prototyping. Long-term structural goal: Architect immersive virtual reality environments (Ref: Sword Art Online construct).</p>
+            </div>
+
+            <div class="spec-box">
+                <h2>Material Tolerances</h2>
+                <ul>
+                    <li>React Native (Tolerance: 90%)</li>
+                    <li>Python (Tolerance: 85%)</li>
+                    <li>JavaScript (Tolerance: 80%)</li>
+                    <li>AI Prompting (Tolerance: 95%)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Access Modules</h2>
+        <div class="links">
+            <a href="https://works-mauve.vercel.app/" class="btn">Execute: Works</a>
+            <a href="https://claydev.site/" class="btn">Execute: Blogs</a>
+            <a href="https://github.com/Clay990/Projects" class="btn">Source: GitHub</a>
+            <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo" class="btn">Specs: Resume</a>
+        </div>
+    </div>
+</body>
+</html>

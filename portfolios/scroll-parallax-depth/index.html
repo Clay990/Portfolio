@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj | Deep Scroll Parallax</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@300;400;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+            font-family: 'Raleway', sans-serif;
+            /* 
+               Crucial for 3D parallax: we make the body huge to enable scrolling,
+               but the actual visual container is fixed.
+            */
+            height: 500vh; 
+            overflow-x: hidden;
+        }
+
+        /* 
+           The viewport container acts as the camera lens.
+           Perspective defines how deep the 3D space is.
+        */
+        .viewport {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            perspective: 1500px;
+            perspective-origin: 50% 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* 
+           The camera layer translates on the Z axis based on scroll.
+           As we scroll down, we push the camera deeper (translateZ increases).
+        */
+        .camera {
+            position: absolute;
+            width: 100%; height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out; /* Smooth scrubbing */
+        }
+
+        /* Generic Layer styling */
+        .layer {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform-style: preserve-3d;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            padding: 0 20px;
+            /* Default transform centers it */
+        }
+
+        h1, h2 { font-family: 'Cinzel', serif; margin: 0; text-transform: uppercase; }
+        
+        /* 
+           Specific Depths.
+           Layer 1 is closest (Z=0). 
+           Layer 2 is further back (Z=-2000px).
+           Layer 3 is even further (Z=-4000px).
+           Layer 4 is furthest (Z=-6000px).
+        */
+        
+        .layer-1 { transform: translate(-50%, -50%) translateZ(0px); }
+        .layer-1 h1 { font-size: 8rem; letter-spacing: 10px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .layer-1 p { font-size: 1.5rem; letter-spacing: 3px; margin-top: 20px; opacity: 0.8; }
+        
+        .scroll-indicator {
+            position: absolute; bottom: -150px;
+            animation: bounce 2s infinite;
+            font-size: 1.2rem; letter-spacing: 2px;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+
+        .layer-2 { transform: translate(-50%, -50%) translateZ(-2500px); }
+        .box-info {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 60px;
+            border-radius: 20px;
+            max-width: 800px;
+        }
+        .layer-2 h2 { font-size: 4rem; margin-bottom: 20px; color: #f4d03f; }
+        .layer-2 p { font-size: 1.5rem; line-height: 1.8; text-align: justify;}
+
+        .layer-3 { transform: translate(-50%, -50%) translateZ(-5000px); }
+        .layer-3 h2 { font-size: 5rem; margin-bottom: 40px; color: #ff3366; }
+        .skills-3d { display: flex; gap: 40px; }
+        .skill-ring {
+            width: 150px; height: 150px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.2rem; font-weight: bold;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spinRing 10s linear infinite;
+        }
+        .skill-ring span { transform: translateZ(20px); animation: spinRingReverse 10s linear infinite; }
+        @keyframes spinRing { to { transform: rotateY(360deg) rotateX(15deg); } }
+        @keyframes spinRingReverse { to { transform: rotateY(-360deg) rotateX(-15deg); } }
+
+        .layer-4 { transform: translate(-50%, -50%) translateZ(-7500px); }
+        .layer-4 h2 { font-size: 6rem; margin-bottom: 50px; text-shadow: 0 0 20px #fff;}
+        .portal-links { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .portal {
+            background: #fff; color: #000;
+            padding: 20px 40px; font-size: 2rem; font-family: 'Cinzel', serif;
+            text-decoration: none; font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 0 #fff;
+        }
+        .portal:hover { transform: scale(1.1) translateZ(50px); box-shadow: 0 0 40px #fff; background: #000; color: #fff; border: 2px solid #fff;}
+
+        /* Particles in 3D space */
+        .stars {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        @media (max-width: 800px) {
+            .layer-1 h1 { font-size: 4rem; }
+            .layer-2 h2 { font-size: 2.5rem; }
+            .box-info { padding: 30px; width: 90vw; }
+            .layer-2 p { font-size: 1.1rem; }
+            .skills-3d { flex-wrap: wrap; justify-content: center; }
+            .layer-3 h2 { font-size: 3rem; }
+            .layer-4 h2 { font-size: 3.5rem; }
+            .portal-links { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 
+      The core mathematical mechanic: 
+      The body is 500vh tall. We listen to window.scrollY.
+      We map scrollY to a Z-axis translation on the .camera element.
+      As you scroll down, the camera moves "forward" into the screen (translateZ increases).
+      Layers placed at negative Z values will come closer to the camera and pass through it.
+    -->
+    <div class="viewport">
+        <div class="camera" id="camera">
+            
+            <!-- Generate some 3D stars via JS -->
+            <div class="stars" id="stars-container"></div>
+
+            <div class="layer layer-1" id="l1">
+                <h1>SURAJ MONDAL</h1>
+                <p>Scroll To Dive Deeper</p>
+                <div class="scroll-indicator">↓</div>
+            </div>
+
+            <div class="layer layer-2" id="l2">
+                <div class="box-info">
+                    <h2>The Vibe Coder</h2>
+                    <p>I am a BCA student at MAKAUT, operating at the intersection of full-stack development and artificial intelligence. I don't just write code; I architect solutions, utilizing prompt engineering to rapidly ship applications and hackathon projects.</p>
+                </div>
+            </div>
+
+            <div class="layer layer-3" id="l3">
+                <h2>System Proficiencies</h2>
+                <div class="skills-3d">
+                    <div class="skill-ring"><span>REACT NATIVE</span></div>
+                    <div class="skill-ring" style="animation-delay: -2s;"><span>PYTHON</span></div>
+                    <div class="skill-ring" style="animation-delay: -4s;"><span>JAVASCRIPT</span></div>
+                    <div class="skill-ring" style="animation-delay: -6s;"><span>AI PROMPTING</span></div>
+                </div>
+            </div>
+
+            <div class="layer layer-4" id="l4">
+                <h2>Ultimate Goal: SAO VR</h2>
+                <div class="portal-links">
+                    <a href="https://works-mauve.vercel.app/" class="portal">Works</a>
+                    <a href="https://claydev.site/" class="portal">Blogs</a>
+                    <a href="https://github.com/Clay990/Projects" class="portal">GitHub</a>
+                    <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo" class="portal">Resume</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Deep 3D Scroll Mathematical Calculation
+         */
+        const camera = document.getElementById('camera');
+        const layers = [
+            document.getElementById('l1'),
+            document.getElementById('l2'),
+            document.getElementById('l3'),
+            document.getElementById('l4')
+        ];
+
+        // The maximum depth we placed our last element at (Layer 4 is at -7500)
+        // We want the total scroll height to map to translating the camera forward by 8000px
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const maxDepth = 8500; 
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            
+            // Calculate percentage of scroll complete (0.0 to 1.0)
+            const scrollPercent = scrollPos / maxScroll;
+            
+            // Map percentage to Z translation
+            const zMove = scrollPercent * maxDepth;
+            
+            // Move camera forward on Z axis
+            camera.style.transform = `translateZ(${zMove}px)`;
+
+            // Opacity fade logic: fade out layers as the camera gets too close or passes them
+            // Layer 1 is at 0, Layer 2 at -2500, Layer 3 at -5000, Layer 4 at -7500
+            const layerDepths = [0, 2500, 5000, 7500];
+
+            layers.forEach((layer, index) => {
+                // How far is the camera from this layer?
+                const distanceToCamera = layerDepths[index] - zMove;
+
+                // If camera is very close (e.g. within 500px), start fading out
+                if (distanceToCamera < 800 && distanceToCamera > -500) {
+                    // Map 800 -> 0 distance to 1 -> 0 opacity
+                    let opacity = Math.max(0, distanceToCamera / 800);
+                    // Fade in if it's coming from far away
+                    layer.style.opacity = opacity;
+                } else if (distanceToCamera <= -500) {
+                    // Passed it entirely
+                    layer.style.opacity = 0;
+                } else {
+                    // Far away, full opacity (fog can be handled by a global overlay if wanted)
+                    // Actually, let's fade them IN as they approach from the deep black
+                    if (distanceToCamera > 3000) {
+                        let opIn = 1 - ((distanceToCamera - 3000) / 1000);
+                        layer.style.opacity = Math.max(0, opIn);
+                    } else {
+                        layer.style.opacity = 1;
+                    }
+                }
+            });
+        });
+
+        // Generate 3D Starfield
+        const starContainer = document.getElementById('stars-container');
+        for(let i=0; i<200; i++) {
+            const star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.width = '2px';
+            star.style.height = '2px';
+            star.style.background = '#fff';
+            star.style.borderRadius = '50%';
+            
+            // Randomly position in 3D space
+            const x = (Math.random() - 0.5) * window.innerWidth * 3;
+            const y = (Math.random() - 0.5) * window.innerHeight * 3;
+            const z = (Math.random() * -8000); // Distribute deep into the Z axis
+            
+            star.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+            // Random twinkle
+            star.style.opacity = Math.random();
+            
+            starContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>

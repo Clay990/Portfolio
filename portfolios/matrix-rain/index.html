@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj | Enter The Matrix</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Rain Canvas */
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .data-box {
+            background: rgba(0, 20, 0, 0.7);
+            border: 1px solid #0f0;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            position: relative;
+        }
+
+        /* Scanning line effect over the box */
+        .data-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 0, 0.1) 51%, transparent 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0 0 1rem 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 10px;
+        }
+
+        p { font-size: 1.2rem; line-height: 1.5; }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: pre-wrap; /* Allows text to wrap */
+            display: inline-block;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1em;
+            background: #0f0;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        a {
+            color: #000;
+            background: #0f0;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        a:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 15px #0f0;
+        }
+
+        @media (max-width: 768px) {
+            .data-box { padding: 1.5rem; }
+            h1 { font-size: 2rem; }
+            p { font-size: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+
+    <div class="content-overlay">
+        <div class="data-box">
+            <h1>SURAJ MONDAL</h1>
+            <p>Status: <span id="typing-text"></span><span class="cursor"></span></p>
+            
+            <p style="margin-top: 2rem; opacity: 0.8;">> BCA Student @ MAKAUT.<br>> I build real apps & ship hackathons.<br>> Vibe coding with AI to construct SAO-level VR worlds.<br>> SKILLS: React Native | Python | JavaScript | AI.</p>
+
+            <div class="links">
+                <a href="https://works-mauve.vercel.app/">[ ENTER WORKS ]</a>
+                <a href="https://claydev.site/">[ READ LOGS ]</a>
+                <a href="https://github.com/Clay990/Projects">[ VIEW SOURCE ]</a>
+                <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo">[ GET DATA ]</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Animation
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+        for( let x = 0; x < columns; x++ ) { rainDrops[x] = 1; }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if(rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Typing Effect
+        const textToType = "Full-Stack Mobile Developer. AI Architect.";
+        let i = 0;
+        function typeWriter() {
+            if (i < textToType.length) {
+                document.getElementById("typing-text").innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>

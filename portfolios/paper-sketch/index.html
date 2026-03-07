@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj | Sketchbook</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Shadows+Into+Light&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: #fcf9f2;
+            /* Graph paper background */
+            background-image: 
+                linear-gradient(rgba(0, 150, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 150, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Caveat', cursive;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Red margin line */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 100px;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        .notebook-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 80px; /* Offset for red line */
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 5rem;
+            margin: 1rem 0;
+            color: #1a1a1a;
+            transform: rotate(-2deg);
+        }
+
+        .doodle {
+            border: 2px dashed #666;
+            padding: 20px;
+            border-radius: 10px 255px 15px 225px / 255px 15px 225px 15px; /* Hand-drawn box effect */
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.5);
+            transition: 0.3s;
+        }
+
+        .doodle:hover {
+            transform: scale(1.02) rotate(1deg);
+            background: #fff;
+        }
+
+        h2 { font-size: 2.5rem; margin-top: 0; text-decoration: underline; text-decoration-style: wavy;}
+        
+        p { font-size: 1.5rem; line-height: 1.4; }
+
+        .highlighter {
+            background: linear-gradient(104deg, rgba(255,255,0,0) 0.9%, rgba(255,255,0,0.8) 2.4%, rgba(255,255,0,0.6) 5.8%, rgba(255,255,0,0.8) 93%, rgba(255,255,0,0.0) 96%);
+            padding: 0 5px;
+        }
+
+        ul { list-style-type: none; padding: 0; font-size: 1.5rem;}
+        li::before { content: "• "; color: #333; font-weight: bold; }
+
+        .links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        a {
+            color: #0000ee;
+            font-size: 1.8rem;
+            text-decoration: none;
+            border-bottom: 2px solid #0000ee;
+            transition: 0.2s;
+            font-family: 'Shadows Into Light', cursive;
+        }
+
+        a:hover {
+            color: #ff0000;
+            border-bottom-color: #ff0000;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            body::before { left: 40px; }
+            .notebook-content { padding-left: 20px; }
+            h1 { font-size: 3.5rem; }
+            p, ul, a { font-size: 1.3rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="notebook-content">
+        <h1>Suraj Mondal</h1>
+        
+        <div class="doodle">
+            <h2>About Me</h2>
+            <p>I'm a Full-Stack Mobile Dev & BCA Student at MAKAUT.</p>
+            <p>I love <span class="highlighter">vibe-coding with AI</span> to build real apps and ship hackathon projects.</p>
+            <p>My dream: Build immersive SAO-like digital worlds! 🌍✨</p>
+        </div>
+
+        <div class="doodle" style="transform: rotate(1deg);">
+            <h2>My Toolkit:</h2>
+            <ul>
+                <li>React Native (90%)</li>
+                <li>Python (85%)</li>
+                <li>JavaScript (80%)</li>
+                <li>AI Prompting (95%)</li>
+            </ul>
+        </div>
+
+        <div class="links">
+            <a href="https://works-mauve.vercel.app/">See My Works -></a>
+            <a href="https://claydev.site/">Read Blogs -></a>
+            <a href="https://github.com/Clay990/Projects">GitHub -></a>
+            <a href="https://docs.google.com/document/d/1fg4KpN7jr6UFXto03ixI59kpGdYQtyY4lyXxO57Fuyo">Resume -></a>
+        </div>
+    </div>
+</body>
+</html>
